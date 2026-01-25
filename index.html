@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chris Columbus | Film Director - 3D Portfolio</title>
+    <style>
+        /* Enhanced Global Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Times New Roman', sans-serif; 
+            background: linear-gradient(135deg, #000 0%, #0d1117 30%, #1a1a2e 70%, #16213e 100%); 
+            color: #fff; overflow-x: hidden; scroll-behavior: smooth; 
+            perspective: 1200px;
+        }
+        nav { 
+            position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.95); 
+            backdrop-filter: blur(20px); z-index: 1000; padding: 1rem 0; 
+            box-shadow: 0 4px 30px rgba(212,175,55,0.2);
+        }
+        nav ul { display: flex; justify-content: center; list-style: none; }
+        nav li { margin: 0 2rem; }
+        nav a { 
+            color: #D4AF37; text-decoration: none; font-weight: bold; 
+            transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94); 
+            position: relative;
+        }
+        nav a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #D4AF37; transition: width 0.3s; }
+        nav a:hover { color: #fff; text-shadow: 0 0 20px #D4AF37; }
+        nav a:hover::after { width: 100%; }
+
+        /* Enhanced Animations */
+        section { 
+            min-height: 100vh; padding: 120px 5%; position: relative; 
+            opacity: 0; transform: translateY(80px) rotateX(15deg); 
+            transition: all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        section.fade-in { 
+            opacity: 1; transform: translateY(0) rotateX(0deg); 
+        }
+        h1, h2 { 
+            color: #D4AF37; text-shadow: 0 0 30px #D4AF37; 
+            font-size: clamp(2.5rem, 6vw, 5rem); margin-bottom: 1.5rem; 
+            transform: perspective(500px) rotateX(20deg); transition: all 0.8s;
+        }
+        h1:hover, h2:hover { transform: perspective(500px) rotateX(0deg) scale(1.05); }
+
+        /* CSS-ONLY Particle System - NO CANVAS */
+        .particles { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            pointer-events: none; z-index: -1; 
+        }
+        .particle { 
+            position: absolute; width: 10px; height: 10px;
+            background: radial-gradient(circle, #D4AF37, #FFD700); 
+            border-radius: 50%; 
+            box-shadow: 0 0 10px #D4AF37;
+            animation: magicFloat linear infinite;
+        }
+        .particle:nth-child(1) { left: 10%; animation-duration: 15s; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-duration: 20s; animation-delay: -2s; }
+        .particle:nth-child(3) { left: 30%; animation-duration: 18s; animation-delay: -4s; }
+        .particle:nth-child(4) { left: 40%; animation-duration: 22s; animation-delay: -1s; }
+        .particle:nth-child(5) { left: 50%; animation-duration: 16s; animation-delay: -6s; }
+        .particle:nth-child(6) { left: 60%; animation-duration: 19s; animation-delay: -3s; }
+        .particle:nth-child(7) { left: 70%; animation-duration: 21s; animation-delay: -5s; }
+        .particle:nth-child(8) { left: 80%; animation-duration: 17s; animation-delay: -7s; }
+        .particle:nth-child(9) { left: 90%; animation-duration: 23s; animation-delay: -8s; }
+        .particle:nth-child(10) { left: 15%; animation-duration: 14s; animation-delay: -9s; }
+        @keyframes magicFloat { 
+            0% { transform: translateY(100vh) rotate(0deg) scale(0); opacity: 0; } 
+            10% { opacity: 1; scale: (1); } 
+            90% { opacity: 1; } 
+            100% { transform: translateY(-100px) rotate(720deg) scale(0.5); opacity: 0; } 
+        }
+
+        /* Parallax Hero with 3D Layers */
+        #home { 
+            justify-content: center; text-align: center; 
+            background: radial-gradient(circle at center, rgba(212,175,55,0.1) 0%, transparent 70%);
+        }
+        .hero-container { 
+            perspective: 1500px; height: 80vh; position: relative; 
+        }
+        .hero-bg { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="g" cx="50%" cy="50%"><stop offset="0%" stop-color="%23D4AF37" stop-opacity="0.3"/><stop offset="100%" stop-color="%23D4AF37" stop-opacity="0"/></radialGradient></defs><circle cx="20" cy="20" r="15" fill="url(%23g)"><animate attributeName="cy" values="20;80;20" dur="20s" repeatCount="indefinite"/></circle></svg>') no-repeat center/cover;
+            animation: parallaxFloat 20s infinite linear; z-index: -2;
+        }
+        @keyframes parallaxFloat { 0%, 100% { transform: translateY(0px) rotateZ(0deg); } 50% { transform: translateY(-30px) rotateZ(180deg); } }
+        .hero-title { 
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotateX(30deg) rotateY(-10deg); 
+            font-size: clamp(4rem, 10vw, 8rem); transition: all 1s ease;
+        }
+        .hero-title:hover { transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) scale(1.1); filter: drop-shadow(0 0 50px #D4AF37); }
+        .hero-subtitle { color: #D4AF37; margin-bottom: 3rem; font-style: italic; opacity: 0.8; }
+
+        /* 3D Film Cards - INCREASED CARD HEIGHT TO 750px FOR FULL POSTER */
+        .films-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 3rem; margin-top: 3rem; }
+        .film-card { 
+            background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(0,0,0,0.6)); 
+            border-radius: 25px; padding: 0; height: 750px; position: relative;
+            transform-style: preserve-3d; transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.1);
+            overflow: visible;
+        }
+        .film-card::before { 
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; z-index: 10;
+            background: linear-gradient(90deg, #D4AF37, #FFD700, #D4AF37); animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer { 0%, 100% { transform: scaleX(0); transform-origin: left; } 50% { transform: scaleX(1); transform-origin: left; } }
+        .film-card:hover { 
+            transform: rotateY(180deg) rotateX(5deg) scale(1.05) translateZ(30px); 
+            box-shadow: 0 50px 100px rgba(212,175,55,0.4);
+        }
+        .film-card.hp-highlight { border: 3px solid #D4AF37; box-shadow: 0 0 50px #D4AF37; }
+        .film-card.hp-highlight:hover { box-shadow: 0 0 100px #D4AF37, 0 0 200px rgba(212,175,55,0.3); }
+
+        /* FRONT FACE */
+        .film-front {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            padding: 2rem; display: flex; flex-direction: column;
+            backface-visibility: hidden;
+            overflow: visible;
+        }
+        .film-poster { 
+            width: 100%; height: 500px; object-fit: contain; border-radius: 15px; 
+            margin-bottom: 1.5rem; transform: scale(0.98); transition: all 0.4s;
+            backface-visibility: hidden;
+            background: rgba(0,0,0,0.3);
+            transform: scale(0.98) rotate(0deg);
+        }
+        .film-card:hover .film-poster { transform: scale(1.02) rotateY(3deg); }
+        .film-title { 
+            font-size: 1.6rem; 
+            margin-top: 1.2rem; margin-bottom: 0.8rem; color: #D4AF37;
+            backface-visibility: hidden;
+        }
+        .film-description { 
+            flex-grow: 1; font-size: 1rem; opacity: 0.9; line-height: 1.5;  margin-top: 0.3rem;
+            backface-visibility: hidden;
+        }
+
+        /* BACK FACE - PROPERLY READABLE */
+        .film-back {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(0,0,0,0.8));
+            border-radius: 25px; padding: 2.5rem; transform: rotateY(180deg);
+            display: flex; flex-direction: column; justify-content: center;
+            backface-visibility: hidden;
+            text-align: center;
+        }
+        .film-back h3 { 
+            font-size: 1.8rem; margin-bottom: 1.5rem; color: #D4AF37; 
+            text-shadow: 0 0 20px #D4AF37;
+        }
+        .film-back p { 
+            font-size: 1.1rem; line-height: 1.7; opacity: 0.95;
+        }
+
+        /* Gallery 3D Grid */
+        .legacy-stage {
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 2000px;
+            margin-top: 2rem;
+        }
+
+        .legacy-stack {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            transform-style: preserve-3d;
+            transition: transform 0.8s ease;
+        }
+
+        .legacy-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            border: 2px solid rgba(255,255,255,0.1);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            cursor: pointer;
+            background: #111;
+        }
+
+        .legacy-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        /* Initial Scattered State */
+        .legacy-item:nth-child(1) { transform: translateZ(0) rotate(-5deg); }
+        .legacy-item:nth-child(2) { transform: translateZ(-20px) rotate(3deg) translateX(20px); }
+        .legacy-item:nth-child(3) { transform: translateZ(-40px) rotate(-2deg) translateY(15px); }
+        .legacy-item:nth-child(4) { transform: translateZ(-60px) rotate(6deg) translateX(-15px); }
+
+        /* Hover Stack Area: Spread them out slightly */
+        .legacy-stage:hover .legacy-stack .legacy-item:nth-child(1) { transform: translateX(-150px) translateZ(50px) rotate(-10deg); }
+        .legacy-stage:hover .legacy-stack .legacy-item:nth-child(2) { transform: translateX(150px) translateZ(50px) rotate(10deg); }
+        .legacy-stage:hover .legacy-stack .legacy-item:nth-child(3) { transform: translateY(-120px) translateZ(20px) rotate(2deg); }
+        .legacy-stage:hover .legacy-stack .legacy-item:nth-child(4) { transform: translateY(120px) translateZ(20px) rotate(-2deg); }
+
+        /* Focus specific item */
+        .legacy-item:hover {
+            z-index: 100 !important;
+            transform: scale(1.4) translateZ(300px) rotate(0deg) !important;
+            border-color: #D4AF37;
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.4);
+        }
+
+        .legacy-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Hovering one card dims the others */
+        .legacy-stack:has(.legacy-item:hover) .legacy-item:not(:hover) {
+            opacity: 0.3;
+            filter: blur(4px);
+        }
+
+        @media (max-width: 768px) {
+            .films-container { flex-direction: column; height: auto; }
+            .film-card { height: 250px; flex: none !important; }
+            .legacy-stack { width: 280px; height: 200px; }
+            .legacy-stage:hover .legacy-stack .legacy-item { transform: scale(0.8) !important; }
+        }
+
+        /* Floating 3D Elements */
+        .floating-reel { 
+            position: absolute; width: 80px; height: 80px; background: radial-gradient(circle, #D4AF37 20%, #8B6914); 
+            border-radius: 50%; animation: reelSpin 4s infinite linear; 
+            box-shadow: 0 0 30px #D4AF37; transform-style: preserve-3d;
+        }
+        @keyframes reelSpin { 0% { transform: rotateZ(0deg) rotateX(0deg); } 100% { transform: rotateZ(360deg) rotateX(360deg); } }
+
+        /* Responsive */
+        @media (max-width: 768px) { 
+            section { padding: 100px 4%; } 
+            nav ul { flex-wrap: wrap; gap: 1rem; } 
+            .films-grid { grid-template-columns: 1fr; }
+            .film-poster { height: 400px; }
+        }
+
+        /* Refined Contact Section */
+        .contact-container { text-align: center; }
+        .contact-subtitle { color: #D4AF37; margin-bottom: 3rem; font-style: italic; opacity: 0.8; }
+
+        .contact-slate {
+            display: inline-block;
+            background: #0a0a0a;
+            border: 3px solid #fff;
+            padding: 15px;
+            transform: rotate(-3deg);
+            box-shadow: 15px 15px 0px rgba(212, 175, 55, 0.2);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .contact-slate:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
+            border-color: #D4AF37;
+        }
+
+        .slate-header { 
+            display: flex; border-bottom: 2px solid #fff; 
+            margin-bottom: 15px; padding-bottom: 5px; 
+        }
+
+        .slate-cell { flex: 1; display: flex; flex-direction: column; font-size: 0.7rem; letter-spacing: 1px; }
+        .slate-cell strong { font-size: 1.2rem; color: #D4AF37; }
+
+        .slate-body { border: 2px solid #fff; padding: 40px 60px; margin-bottom: 10px; }
+        .director-name { font-size: 1.8rem; font-weight: bold; letter-spacing: 4px; margin-bottom: 20px; }
+
+        .social-links { display: flex; justify-content: center; gap: 2rem; }
+        .social-icon { color: #fff; transition: 0.3s; }
+        .social-icon:hover { color: #D4AF37; transform: translateY(-8px) scale(1.2); }
+
+        .slate-footer { display: flex; justify-content: space-between; font-size: 0.7rem; opacity: 0.7; }
+
+        /* Awards & Impact Styles */
+        .impact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .award-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 15px;
+            padding: 2.5rem;
+            width: 260px;
+            text-align: center;
+            transition: all 0.5s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .award-card:hover {
+            transform: translateY(-15px) rotateY(10deg);
+            border-color: #D4AF37;
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .award-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px #D4AF37);
+        }
+
+        .award-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .award-card p {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .award-year {
+            display: block;
+            font-weight: bold;
+            color: #D4AF37;
+            letter-spacing: 2px;
+        }
+
+        .highlight-award {
+            border: 2px solid #D4AF37;
+            background: linear-gradient(145deg, rgba(212,175,55,0.1), transparent);
+        }
+
+        /* About Section Refinement */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .about-image {
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateY(15deg);
+            transition: transform 0.8s ease;
+        }
+
+        .about-image:hover {
+            transform: rotateY(0deg);
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            z-index: 2;
+            position: relative;
+        }
+
+        .image-border {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 100%;
+            height: 100%;
+            border: 3px solid #D4AF37;
+            border-radius: 20px;
+            z-index: 1;
+            transform: translateZ(-20px);
+        }
+
+        .about-text {
+            text-align: left;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .stats-mini {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            padding-top: 1.5rem;
+        }
+
+        .stats-mini strong {
+            display: block;
+            font-size: 1.5rem;
+            color: #D4AF37;
+        }
+
+        /* Mobile Adjustments for About Section */
+        @media (max-width: 768px) {
+            .about-container { grid-template-columns: 1fr; text-align: center; }
+            .about-text { text-align: center; }
+            .about-image { transform: none; margin-bottom: 2rem; }
+            .stats-mini { justify-content: center; }
+        }
+
+        /* Refined About Section - Exact Border Fit */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .about-image-frame {
+            perspective: 1000px;
+        }
+
+        .gold-border {
+            padding: 15px; /* This creates the space between image and border */
+            border: 3px solid #D4AF37;
+            border-radius: 20px;
+            position: relative;
+            transform: rotateY(10deg);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            background: rgba(212, 175, 55, 0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .gold-border:hover {
+            transform: rotateY(0deg) scale(1.02);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .gold-border img {
+            width: 100%;
+            display: block;
+            border-radius: 10px; /* Slightly smaller radius for the inner image */
+            filter: grayscale(20%);
+            transition: filter 0.6s ease;
+        }
+
+        .gold-border:hover img {
+            filter: grayscale(0%);
+        }
+
+        .about-text { text-align: left; }
+        .about-text p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; opacity: 0.9; }
+        
+        .stats-mini {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            padding-top: 1.5rem;
+        }
+
+        .stats-mini strong { display: block; font-size: 1.5rem; color: #D4AF37; }
+
+        @media (max-width: 768px) {
+            .about-container { grid-template-columns: 1fr; }
+            .gold-border { transform: none; }
+        }
+
+        
+    </style>
+</head>
+<body>
+    <!-- CSS-ONLY Particle System (10 particles with staggered animations) -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#filmography">Films</a></li>
+            <li><a href="#awards">Awards</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Enhanced 3D Hero -->
+    <section id="home">
+        <div class="hero-container">
+    <div class="hero-bg"></div>
+    
+    
+
+    
+    <h1 class="hero-title">CHRIS COLUMBUS</h1>
+    <p class="hero-subtitle">Mastermind Behind Harry Potter's Magical Beginning</p>
+</div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <div class="about-container">
+            <div class="about-image-frame">
+                <div class="gold-border">
+                    <img src="https://media.cnn.com/api/v1/images/stellar/prod/ap23026597567537.jpg?q=w_1110,c_fill" alt="Chris Columbus">
+                </div>
+            </div>
+            <div class="about-text">
+                <h2>The Visionary</h2>
+                <p>Chris Columbus is a cornerstone of modern American cinema, renowned for crafting stories that define childhood for generations. From penning 80s classics like <em>The Goonies</em> to directing <em>Home Alone</em>, he has mastered the art of family wonder.</p>
+                <p>His greatest legacy remains the cinematic foundation of the Wizarding World. By directing the first two <em>Harry Potter</em> films, Columbus established the visual language and iconic casting that allowed the franchise to become a global phenomenon.</p>
+                <div class="stats-mini">
+                    <span><strong>40+</strong> Years in Film</span>
+                    <span><strong>$4B+</strong> Box Office</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced 3D Filmography -->
+    <section id="filmography">
+        <h2>Iconic Directorial Works</h2>
+        <div class="films-grid">
+            <div class="film-card hp-highlight">
+                <div class="film-front">
+                    <img src="https://image.tmdb.org/t/p/original/mavk9xclj6e5hFFk7I0ZNLo4nVD.jpg" alt="Harry Potter and the Philosopher's Stone" class="film-poster" loading="lazy">
+                    <h3 class="film-title">Harry Potter and the Philosopher's Stone (2001)</h3>
+                    <p class="film-description">The film that launched a global phenomenon—$975M+ worldwide.</p>
+                </div>
+                <div class="film-back">
+                    <h3>Harry Potter and the Philosopher's Stone (2001)</h3>
+                    <p>Chris Columbus brought J.K. Rowling's magical world to life with young Daniel Radcliffe, Rupert Grint, and Emma Watson. The film introduced Hogwarts, captured the wonder of childhood magic, and became the highest-grossing film of 2001 with over $975 million worldwide.</p>
+                </div>
+            </div>
+            <div class="film-card hp-highlight">
+                <div class="film-front">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.Mc07yu3nG1D5aN3Ua0wanwHaJ3?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Harry Potter and the Chamber of Secrets" class="film-poster" loading="lazy">
+                    <h3 class="film-title">Harry Potter and the Chamber of Secrets (2002)</h3>
+                    <p class="film-description">Darker magic, deeper mystery—$879M worldwide triumph.</p>
+                </div>
+                <div class="film-back">
+                    <h3>Harry Potter and the Chamber of Secrets (2002)</h3>
+                    <p>Columbus returned for darker adventures with the mysterious Chamber of Secrets. Featuring stunning effects like the Basilisk and Dobby's debut, it earned $879 million while deepening the Harry Potter mythology with themes of prejudice and hidden dangers.</p>
+                </div>
+            </div>
+            <div class="film-card hp-highlight">
+                <div class="film-front">
+                    <img src="https://image.tmdb.org/t/p/original/grmOKQzwk0T8EXzs56TJJBugISC.jpg" alt="Home Alone" class="film-poster" loading="lazy">
+                    <h3 class="film-title">Home Alone (1990)</h3>
+                    <p class="film-description">Holiday classic that became the top live-action comedy ($476M).</p>
+                </div>
+                <div class="film-back">
+                    <h3>Home Alone (1990)</h3>
+                    <p>Macaulay Culkin's Kevin McCallister defends his home with ingenious traps against burglars. This holiday classic became the highest-grossing live-action comedy ever at $476M and defined Christmas movie traditions worldwide.</p>
+                </div>
+            </div>
+            <div class="film-card hp-highlight">
+                <div class="film-front">
+                    <img src="https://lumiere-a.akamaihd.net/v1/images/homealone2_7706aa6d.jpeg?region=0%2C0%2C584%2C876" alt="Home Alone 2" class="film-poster" loading="lazy">
+                    <h3 class="film-title">Home Alone 2: Lost in New York (1992)</h3>
+                    <p class="film-description">Big Apple chaos sequel ($359M success).</p>
+                </div>
+                <div class="film-back">
+                    <h3>Home Alone 2: Lost in New York (1992)</h3>
+                    <p>Kevin's New York adventure features iconic Plaza Hotel scenes and even bigger traps. The sequel grossed $359M and became a holiday staple with Tim Curry and Brenda Fricker adding memorable villainy.</p>
+                </div>
+            </div>
+            <div class="film-card hp-highlight">
+                <div class="film-front">
+                    <img src="https://www.themoviedb.org/t/p/original/eRrIeSCSFdEKjJCJG6whklICM9N.jpg" alt="Mrs. Doubtfire" class="film-poster" loading="lazy">
+                    <h3 class="film-title">Mrs. Doubtfire (1993)</h3>
+                    <p class="film-description">Robin Williams masterpiece ($441M worldwide).</p>
+                </div>
+                <div class="film-back">
+                    <h3>Mrs. Doubtfire (1993)</h3>
+                    <p>Robin Williams' Oscar-nominated performance as a divorced dad in nanny disguise. This heartfelt family comedy grossed $441M and remains one of the highest-grossing comedies of the 1990s.</p>
+                </div>
+            </div>
+            <div class="film-card hp-highlight">
+                <div class="film-front">
+                    <img src="https://image.tmdb.org/t/p/original/brzpTyZ5bnM7s53C1KSk1TmrMO6.jpg" alt="Percy Jackson" class="film-poster" loading="lazy">
+                    <h3 class="film-title">Percy Jackson & the Olympians: The Lightning Thief (2010)</h3>
+                    <p class="film-description">Mythic quest adaptation ($226M).</p>
+                </div>
+                <div class="film-back">
+                    <h3>Percy Jackson & the Olympians: The Lightning Thief (2010)</h3>
+                    <p>Logan Lerman stars as the demigod discovering his heritage in Rick Riordan's mythic world. Uma Thurman as Medusa and Pierce Brosnan as a centaur brought Greek mythology to modern audiences with $226M box office.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="awards">
+        <h2>Career Impact & Accolades</h2>
+        <div class="impact-container">
+            <div class="award-card highlight-award">
+                <div class="award-icon">🏆</div>
+                <h3>BAFTA Nominee</h3>
+                <p>Best Children's Film</p>
+                <span class="award-year">2002</span>
+            </div>
+            <div class="award-card highlight-award ">
+                <div class="award-icon">🌟</div>
+                <h3>Lifetime Achievement</h3>
+                <p>AFI Fest Honor</p>
+                <span class="award-year">2013</span>
+            </div>
+            <div class="award-card highlight-award">
+                <div class="award-icon">🎬</div>
+                <h3>Best Director</h3>
+                <p>Saturn Awards</p>
+                <span class="award-year">2002</span>
+            </div>
+            <div class="award-card highlight-award">
+                <div class="award-icon">💰</div>
+                <h3>$4.1 Billion+</h3>
+                <p>Cumulative Box Office Impact</p>
+                <span class="award-year">Global Legacy</span>
+            </div>
+        </div>
+    </section>
+    <!-- Gallery with Real Images -->
+    <section id="gallery">
+        <h2>Visual Legacy</h2>
+        <div class="legacy-stage">
+            <div class="legacy-stack">
+                <div class="legacy-item"><img src="https://cdn.mos.cms.futurecdn.net/m46Y59WEraYs4zeAoDwxrd.jpg" alt="Harry Potter Magic"></div>
+                <div class="legacy-item"><img src="https://static1.colliderimages.com/wordpress/wp-content/uploads/2021/12/home-alone-movie-traps.jpg" alt="Home Alone Rig"></div>
+                <div class="legacy-item"><img src="https://flxt.tmsimg.com/assets/p15209_v_h9_bf.jpg" alt="Mrs Doubtfire"></div>
+                <div class="legacy-item"><img src="https://ntvb.tmsimg.com/assets/p177957_v_h10_ax.jpg?w=960&h=540" alt="Percy Jackson"></div>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 2rem; opacity: 0.6; font-style: italic;"></p>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="contact-container">
+            <h2>Get In Touch</h2>
+            <p class="contact-subtitle">Let’s create something legendary together.</p>
+            
+            <div class="contact-slate">
+                <div class="slate-header">
+                    <div class="slate-cell"><span>SCENE</span><strong>01</strong></div>
+                    <div class="slate-cell"><span>TAKE</span><strong>ROLL</strong></div>
+                </div>
+                <div class="slate-body">
+                    <p class="director-name">CHRIS COLUMBUS</p>
+                    <div class="social-links">
+                        <a href="https://www.imdb.com/name/nm0002005/" target="_blank" class="social-icon" title="IMDb">
+                            <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M23.5 3h-23c-.276 0-.5.224-.5.5v17c0 .276.224.5.5.5h23c.276 0 .5-.224.5-.5v-17c0-.276-.224-.5-.5-.5zm-14.717 13.5h-1.688v-5.228l-.941 5.228h-1.344l-.941-5.228v5.228h-1.611v-7.149h2.367l.86 4.729.86-4.729h2.398v7.149zm3.504 0h-3.41v-7.149h3.41c1.196 0 1.838.647 1.838 1.835v3.479c0 1.188-.642 1.835-1.838 1.835zm4.831 0h-1.681v-7.149h1.681v7.149zm6.182-4.149c0 1.188-.643 1.835-1.838 1.835h-.952v2.314h-1.681v-7.149h2.633c1.195 0 1.838.647 1.838 1.835v1.165zm-7.616-1.165h.941v3.479h-.941v-3.479zm6.111 1.165h-.952v-1.165h.952v1.165z"/></svg>
+                        </a>
+                        <a href="#" class="social-icon" title="Instagram">
+                            <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="#" class="social-icon" title="Twitter">
+                            <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="slate-footer">
+                    <span>PROD: 1492 PICTURES</span>
+                    <span>DATE: 2024</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth Navigation + Scroll Animations (MINIMAL JS)
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelector(anchor.getAttribute('href')).scrollIntoView({ 
+                    behavior: 'smooth', block: 'start' 
+                });
+            });
+        });
+
+        // Scroll-triggered animations
+        function handleScroll() {
+            const sections = document.querySelectorAll('section');
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 150) {
+                    section.classList.add('fade-in');
+                }
+            });
+        }
+        window.addEventListener('scroll', handleScroll);
+        handleScroll();
+
+        // Hero parallax mouse effect
+        document.querySelector('.hero-container').addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const x = (clientX / window.innerWidth) * 20 - 10;
+            const y = (clientY / window.innerHeight) * 20 - 10;
+            document.querySelector('.hero-title').style.transform = 
+                `translate(-50%, -50%) rotateX(${y}deg) rotateY(${x}deg) scale(1.02)`;
+        });
+    </script>
+</body>
+</html>
