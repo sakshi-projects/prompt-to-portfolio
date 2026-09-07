@@ -1032,6 +1032,563 @@
         grid-template-columns: 1fr 1fr;
     }
 }
+
+/* =========================================================
+   RESPONSIVE DESIGN
+   Mobile + Tablet + Laptop + Different Screen Sizes
+   ========================================================= */
+
+/* Prevent horizontal overflow */
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* =========================
+   LARGE LAPTOP / DESKTOP
+   ========================= */
+
+@media (max-width: 1200px) {
+
+    section {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+    .films-grid {
+        grid-template-columns: repeat(2, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .film-card {
+        height: 700px;
+    }
+
+    .film-poster {
+        height: 450px;
+    }
+
+    .about-container {
+        gap: 3rem;
+    }
+}
+
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (max-width: 900px) {
+
+    section {
+        width: 100%;
+        min-height: 100vh;
+        padding: 110px 30px 80px;
+    }
+
+    /* Navigation */
+    nav {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    nav ul {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 0 20px;
+        gap: 10px;
+        scrollbar-width: none;
+    }
+
+    nav ul::-webkit-scrollbar {
+        display: none;
+    }
+
+    nav li {
+        flex: 0 0 auto;
+        margin: 0 1rem;
+    }
+
+    nav a {
+        white-space: nowrap;
+    }
+
+    /* Hero */
+    .hero-container {
+        width: 100%;
+        height: 75vh;
+    }
+
+    .hero-title {
+        width: 100%;
+        padding: 0 20px;
+        font-size: clamp(3rem, 9vw, 6rem);
+    }
+
+    .hero-subtitle {
+        max-width: 650px;
+        margin: 0 auto;
+        padding: 0 20px;
+        line-height: 1.5;
+    }
+
+    /* About */
+    .about-container {
+        grid-template-columns: 1fr;
+        max-width: 700px;
+        gap: 3rem;
+    }
+
+    .about-text {
+        text-align: center;
+    }
+
+    /* Films */
+    .films-grid {
+        grid-template-columns: repeat(2, minmax(280px, 1fr));
+        width: 100%;
+    }
+
+    .film-card {
+        height: 650px;
+    }
+
+    .film-front {
+        padding: 1.5rem;
+    }
+
+    .film-poster {
+        height: 400px;
+    }
+
+    /* Awards */
+    .impact-container {
+        width: 100%;
+        gap: 1.5rem;
+    }
+
+    .award-card {
+        width: 240px;
+    }
+
+    /* Gallery */
+    .legacy-stage {
+        width: 100%;
+        height: 450px;
+    }
+
+    .legacy-stack {
+        max-width: 90%;
+    }
+
+    /* Contact */
+    .contact-slate {
+        max-width: 90%;
+    }
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 600px) {
+
+    /* Main page width */
+    html,
+    body {
+        width: 100%;
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    /* Sections */
+    section {
+        width: 100%;
+        min-height: 100vh;
+        padding: 100px 20px 70px;
+        overflow: hidden;
+    }
+
+    /* =====================
+       NAVIGATION
+       ===================== */
+
+    nav {
+        width: 100%;
+        max-width: 100%;
+        padding: 0.9rem 0;
+    }
+
+    nav ul {
+        width: 100%;
+        max-width: 100%;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 0 15px;
+        gap: 5px;
+        scrollbar-width: none;
+    }
+
+    nav ul::-webkit-scrollbar {
+        display: none;
+    }
+
+    nav li {
+        flex: 0 0 auto;
+        margin: 0 0.7rem;
+    }
+
+    nav a {
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+
+
+    /* =====================
+       HERO
+       ===================== */
+
+    #home {
+        width: 100%;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-container {
+        width: 100%;
+        max-width: 100%;
+        height: calc(100vh - 70px);
+        min-height: 600px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .hero-bg {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .hero-title {
+        position: relative;
+        top: auto;
+        left: auto;
+
+        width: 100%;
+        max-width: 100%;
+
+        transform: none;
+
+        font-size: clamp(2.5rem, 12vw, 4rem);
+        line-height: 1.05;
+
+        text-align: center;
+
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+
+        margin: 0;
+        padding: 0;
+    }
+
+    .hero-subtitle {
+        position: relative;
+
+        width: 100%;
+        max-width: 420px;
+
+        margin: 25px auto 0;
+        padding: 0 10px;
+
+        font-size: 1rem;
+        line-height: 1.5;
+
+        text-align: center;
+    }
+
+
+    /* =====================
+       ABOUT
+       ===================== */
+
+    .about-container {
+        width: 100%;
+        max-width: 100%;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .about-image-frame {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .gold-border {
+        width: 100%;
+        transform: none;
+    }
+
+    .about-text {
+        width: 100%;
+        text-align: center;
+    }
+
+    .about-text p {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .stats-mini {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+
+
+    /* =====================
+       FILMOGRAPHY
+       ===================== */
+
+    #filmography {
+        width: 100%;
+    }
+
+    #filmography > h2,
+    #awards > h2,
+    #gallery > h2,
+    #contact h2 {
+        font-size: clamp(2rem, 9vw, 3rem);
+        text-align: center;
+    }
+
+    .films-grid {
+        width: 100%;
+        max-width: 100%;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .film-card {
+        width: 100%;
+        max-width: 100%;
+        height: 600px;
+    }
+
+    .film-front {
+        width: 100%;
+        padding: 1.2rem;
+    }
+
+    .film-poster {
+        width: 100%;
+        height: 380px;
+        object-fit: contain;
+    }
+
+    .film-title {
+        font-size: 1.3rem;
+        line-height: 1.3;
+    }
+
+    .film-description {
+        font-size: 0.9rem;
+    }
+
+    .film-back {
+        width: 100%;
+        padding: 1.5rem;
+    }
+
+    .film-back h3 {
+        font-size: 1.4rem;
+    }
+
+    .film-back p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+
+    /* =====================
+       AWARDS
+       ===================== */
+
+    .impact-container {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .award-card {
+        width: 100%;
+        max-width: 330px;
+    }
+
+
+    /* =====================
+       GALLERY
+       ===================== */
+
+    .legacy-stage {
+        width: 100%;
+        max-width: 100%;
+        height: 400px;
+        overflow: hidden;
+    }
+
+    .legacy-stack {
+        width: 280px;
+        height: 210px;
+        max-width: 90%;
+    }
+
+    .legacy-stage:hover .legacy-stack .legacy-item:nth-child(1) {
+        transform: translateX(-80px) translateZ(30px) rotate(-8deg);
+    }
+
+    .legacy-stage:hover .legacy-stack .legacy-item:nth-child(2) {
+        transform: translateX(80px) translateZ(30px) rotate(8deg);
+    }
+
+    .legacy-stage:hover .legacy-stack .legacy-item:nth-child(3) {
+        transform: translateY(-70px) translateZ(20px) rotate(2deg);
+    }
+
+    .legacy-stage:hover .legacy-stack .legacy-item:nth-child(4) {
+        transform: translateY(70px) translateZ(20px) rotate(-2deg);
+    }
+
+
+    /* =====================
+       CONTACT
+       ===================== */
+
+    .contact-container {
+        width: 100%;
+    }
+
+    .contact-slate {
+        width: 100%;
+        max-width: 350px;
+        padding: 12px;
+    }
+
+    .slate-body {
+        padding: 30px 15px;
+    }
+
+    .director-name {
+        font-size: 1.3rem;
+        letter-spacing: 2px;
+    }
+
+    .social-links {
+        gap: 1.3rem;
+    }
+
+    .slate-footer {
+        font-size: 0.6rem;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE
+   ========================= */
+
+@media (max-width: 400px) {
+
+    section {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    nav li {
+        margin: 0 0.55rem;
+    }
+
+    nav a {
+        font-size: 0.82rem;
+    }
+
+    .hero-container {
+        min-height: 550px;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+        max-width: 300px;
+    }
+
+    .film-card {
+        height: 560px;
+    }
+
+    .film-poster {
+        height: 340px;
+    }
+
+    .film-title {
+        font-size: 1.15rem;
+    }
+
+    .film-description {
+        font-size: 0.85rem;
+    }
+
+    .legacy-stack {
+        width: 240px;
+        height: 180px;
+    }
+
+    .contact-slate {
+        max-width: 100%;
+    }
+}
+
+
+/* =========================
+   VERY WIDE SCREENS
+   ========================= */
+
+@media (min-width: 1600px) {
+
+    section {
+        padding-left: 8%;
+        padding-right: 8%;
+    }
+
+    .films-grid {
+        max-width: 1500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .about-container {
+        max-width: 1300px;
+    }
+}
     </style>
 </head>
 <body>
